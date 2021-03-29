@@ -1,0 +1,65 @@
+= Qt examples 2021
+
+TODO...
+
+== Prepare Dev enviroment
+
+Install dependencies 
+
+* xcode-select --install
+* brew install cmake 
+* brew upgrade cmake 
+
+Variables 
+
+* CMAKE_PREFIX_PATH
+* QT_DIR
+
+.Cmake how to use 
+----
+cmake [options] <path-to-source>
+cmake [options] <path-to-existing-build>
+cmake [options] -S <path-to-source> -B <path-to-build>
+----
+
+.Location 
+----
+/Applications/Qt/Tools/Conan/profiles/qt-6.0.3-macx-clang
+/Applications/Qt/Tools/Ninja/ninja
+/Applications/Qt/Tools/CMake/CMake.app/Contents/bin/cmake
+/Applications/Qt/6.0.3/clang_64/bin/qmake
+----
+
+== Build Application 
+
+.Create Build Directory 
+----
+mkdir -p build_PB_QtDemo20210328
+cd build_PB_QtDemo20210328
+----
+
+.Generate build (Option 1)
+----
+cmake -DCMAKE_TOOLCHAIN_FILE=/Applications/Qt/6.0.3/clang_64/lib/cmake/Qt6/qt.toolchain.cmake ../PB_QtDemo20210328
+----
+
+.Generate build (Option 2)
+----
+/Applications/Qt/6.0.3/clang_64/bin/qt-cmake ../PB_QtDemo20210328
+----
+
+.Generate build (Option 3)
+----
+cmake ../PB_QtDemo20210328
+----
+
+
+.Build 
+----
+cmake --build .
+----
+
+
+== CPack
+
+Installer generator 
