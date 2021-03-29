@@ -1,0 +1,33 @@
+name: Build Adressbook
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-20.04, windows-2019, macos-10.15]
+        version: ['6.0.0']
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v2
+
+      - name: Build project on windows
+        if: startsWith(matrix.os, 'windows')
+        run: |
+          cd addressbook
+          call "%programfiles(x86)%\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+          dir %Qt6_DIR%/lib/cmake
+          qmake
+        shell: cmd
+
+      - name: Build project on unix
+        if: (!startsWith(matrix.os, 'windows'))
+        run: |
+          cd addressbook
+          ls $Qt6_DIR/lib/cmake
+          qmake
+        shell: bash
